@@ -1,0 +1,28 @@
+{
+  "name": "ict2x01-team-p3-2",
+  "version": "1.0.0",
+  "description": "Robo-Sensei is a project that aims to educate user critical problem solving and computational thinking skills using robotic car with the customizable controls from the web portal",
+  "main": "index.js",
+  "scripts": {
+    "dev":"nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DoctorDoge/ICT2x01-Team-P3-2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DoctorDoge/ICT2x01-Team-P3-2/issues"
+  },
+  "homepage": "https://github.com/DoctorDoge/ICT2x01-Team-P3-2#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12",
+    "validation": "^0.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
