@@ -4120,7 +4120,8 @@ fieldset:disabled a.btn {
 .btn-light {
   color: #212529;
   background-color: #f8f9fa;
-  border-color: #f8f9fa; }
+  border-color: #f8f9fa;
+  line-height: 20 }
   .btn-light:hover {
     color: #212529;
     background-color: #e2e6ea;
@@ -4148,7 +4149,8 @@ fieldset:disabled a.btn {
 .btn-dark {
   color: #fff;
   background-color: #3e4b5b;
-  border-color: #3e4b5b; }
+  border-color: #3e4b5b;
+  line-height: 20 }
   .btn-dark:hover {
     color: #fff;
     background-color: #2f3844;
@@ -11169,7 +11171,7 @@ code {
 /* Buttons */
 .btn {
   font-size: 0.875rem;
-  line-height: 1;
+  /* line-height: 1; */
   font-family: "ubuntu-bold", sans-serif;
   /* Buttons with only icons */
   /* Buttons with icon and text */ }
