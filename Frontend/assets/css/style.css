@@ -13511,6 +13511,8 @@ dl {
               right: unset; }
     .sidebar-icon-only .sidebar .sidebar-actions {
       display: none; }
+  .sidebar-icon-only .main-panel {
+    width: calc(100% - 70px); } }
 
 .rtl {
   direction: rtl;
@@ -13536,7 +13538,9 @@ dl {
 
 .page-body-wrapper {
   min-height: calc(100vh - 70px);
+  display: -webkit-box;
   display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
@@ -13550,6 +13554,7 @@ dl {
 .main-panel {
   -webkit-transition: width 0.25s ease, margin 0.25s ease;
   transition: width 0.25s ease, margin 0.25s ease;
+  width: calc(100%);
   min-height: calc(100vh - 70px);
   display: -webkit-box;
   display: -ms-flexbox;
