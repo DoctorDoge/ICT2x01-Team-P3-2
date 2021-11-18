@@ -10545,6 +10545,7 @@ code {
 
 /* Utilities */
 .grid-margin, .purchase-popup {
+  margin: auto;
   margin-bottom: 2.5rem; }
 
 @media (min-width: 576px) {
