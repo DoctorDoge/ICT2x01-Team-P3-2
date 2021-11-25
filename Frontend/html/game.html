@@ -17,6 +17,12 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../assets/images/favicon.ico" />
+    <!--Blockly JS -->
+    <script src="../node_modules/blockly/blockly_compressed.js"></script>
+    <script src="../node_modules/blockly/blocks_compressed.js"></script>
+    <script src="../node_modules/blockly/msg/en.js"></script>
+    <script src="../assets/js/game.js"></script>
+    <!--End Blockly JS -->
   </head>
   <body>
     <div class="container-scroller">
@@ -67,13 +73,22 @@
                   <i class="mdi mdi-home"></i>
                 </span> Dashboard
               </h3>
+
+              <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group me-2" role="group" aria-label="First group">
+                  <button type="button" class="btn btn-primary">Level 1</button>
+                  <button type="button" class="btn btn-primary">Level 2</button>
+                  <button type="button" class="btn btn-primary">Level 3</button>
+                  <button type="button" class="btn btn-primary">Level 4</button>
+                </div>
+              </div>
             </div>
             <div class="row">
               <div class="col-4 grid-margin" id="left-panel">
                 <div class="card">
                     <div class="card-body">
                           <div class="row-lg" id="gamemap">
-                            <p>INSERT GAME MAP HERE</p>
+                          <canvas id="canvas-map" width="150" height="150"></canvas>
                           </div>
                           <div class="row-lg" id="BUTTONS">
                             <p>INSERT BUTTON HERE</p>
@@ -88,16 +103,20 @@
                     <div class="row" id="instructions">
                       <p>INSERT INTRUCTIONS HERE</p>
                     </div>
-
-                    <div class="row" id="input-panel">
-                      <div class="col-6"><p>INSERT BLOCKS HERE</p></div>
-                      <div class="col-6"><p>INSERT INPUT PANEL HERE</p></div>
+                    <div class="row">
+                      <div id="blocklyDiv" style="height: 480px; width: 1000px;"></div>
+                      <xml id="toolbox" style="display: none">
+                        <block type="move_forward"></block>
+                        <block type="move_backward"></block>
+                        <block type="turn_left"></block>
+                        <block type="turn_right"></block>
+                        <block type="repeat_loop"></block>
+                        <block type="controls_repeat_ext"></block>
+                      </xml>
                     </div>
                   </div>
                 </div>
               </div>
-
-
             </div>
           </div>
           <!-- content-wrapper ends -->
@@ -113,6 +132,11 @@
       </div>
       <!-- page-body-wrapper ends -->
     </div>
+    <!-- blockly scripts-->
+    <script>
+      var workspace = Blockly.inject('blocklyDiv',
+          {toolbox: document.getElementById('toolbox')});
+    </script>
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="../assets/vendors/js/vendor.bundle.base.js"></script>
