@@ -104,8 +104,11 @@ Hero.SPEED = 512; // pixels per second
 
 Hero.prototype.move = function (delta, dirx, diry) {
     // move hero
-    this.x += dirx * Hero.SPEED * delta;
-    this.y += diry * Hero.SPEED * delta;
+    // this.x += dirx * Hero.SPEED * delta;
+    // this.y += diry * Hero.SPEED * delta;
+    // test speed here
+    this.x += dirx * this.width / 8 ;
+    this.y += diry * this.width / 8 ;
 
     // check if we walked into a non-walkable tile
     this._collide(dirx, diry);
