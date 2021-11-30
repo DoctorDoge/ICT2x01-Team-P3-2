@@ -1,33 +1,25 @@
 var map = {
-    cols: 12,
-    rows: 12,
+    cols: 8,
+    rows: 8,
     tsize: 64,
     layers: [[
-        3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 3,
-        3, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3,
-        3, 3, 3, 1, 1, 2, 3, 3, 3, 3, 3, 3
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1
     ], [
-        4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 4, 4, 0, 5, 4, 4, 4, 4, 4, 4, 4,
-        4, 4, 4, 0, 0, 3, 3, 3, 3, 3, 3, 3
+        5, 5, 5, 5, 5, 5, 5, 5,
+        5, 0, 0, 0, 0, 0, 0, 5,
+        5, 0, 0, 0, 0, 0, 0, 5,
+        5, 0, 0, 0, 0, 0, 0, 5,
+        5, 0, 0, 0, 0, 0, 0, 5,
+        5, 0, 0, 0, 0, 0, 0, 5,
+        5, 0, 0, 0, 0, 0, 0, 5,
+        5, 5, 5, 5, 5, 5, 5, 5,
     ]],
     getTile: function (layer, col, row) {
         return this.layers[layer][row * map.cols + col];
@@ -79,9 +71,6 @@ Camera.prototype.update = function () {
     this.following.screenX = this.width / 2;
     this.following.screenY = this.height / 2;
 
-    // make the camera follow the sprite
-    this.x = this.following.x - this.width / 2;
-    this.y = this.following.y - this.height / 2;
     // clamp values
     this.x = Math.max(0, Math.min(this.x, this.maxX));
     this.y = Math.max(0, Math.min(this.y, this.maxY));
@@ -111,7 +100,7 @@ function Hero(map, x, y) {
     this.image = Loader.getImage('hero');
 }
 
-Hero.SPEED = 256; // pixels per second
+Hero.SPEED = 512; // pixels per second
 
 Hero.prototype.move = function (delta, dirx, diry) {
     // move hero
