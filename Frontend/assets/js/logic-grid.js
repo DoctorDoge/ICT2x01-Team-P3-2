@@ -50,7 +50,7 @@ var map = {
     }
 };
 
-var flag = 0;
+var directionFlag = 0;
 
 function Camera(map, width, height) {
     this.x = 0;
@@ -102,7 +102,7 @@ function Hero(map, x, y) {
     this.image = Loader.getImage('hero');
 }
 
-Hero.prototype.move = function (delta, dirx, diry) {
+Hero.prototype.move = function (dirx, diry) {
     // move hero
     this.x += dirx;
     this.y += diry;
@@ -171,19 +171,19 @@ Game.update = function (delta) {
     var dirx = 0;
     var diry = 0;
     
-    if (flag == 1) {
+    if (directionFlag == 1) {
         diry = -64; 
-    }else if (flag == 2) {
+    }else if (directionFlag == 2) {
         diry = 64; 
-    }else if (flag == 3) {
+    }else if (directionFlag == 3) {
         dirx = -64; 
-    }else if (flag == 4) {
+    }else if (directionFlag == 4) {
         dirx = 64; 
     }
 
-    flag = 0;
+    directionFlag = 0;
 
-    this.hero.move(delta, dirx, diry);
+    this.hero.move(dirx, diry);
     this.camera.update();
 };
 
@@ -256,17 +256,17 @@ Game.render = function () {
 };
 
 function moveUpButton() {
-    flag = 1;
+    directionFlag = 1;
 } 
 
 function moveDownButton() {
-    flag = 2;
+    directionFlag = 2;
 } 
 
 function moveLeftButton() {
-    flag = 3;
+    directionFlag = 3;
 } 
 
 function moveRightButton() {
-    flag = 4;
+    directionFlag = 4;
 } 
