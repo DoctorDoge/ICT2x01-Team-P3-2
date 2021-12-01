@@ -22,6 +22,8 @@
     <script src="../node_modules/blockly/blocks_compressed.js"></script>
     <script src="../node_modules/blockly/msg/en.js"></script>
     <script src="../assets/js/game.js"></script>
+    <script src="../assets/js/common.js"></script>
+    <script src="../assets/js/logic-grid.js"></script>
     <!--End Blockly JS -->
   </head>
   <body>
@@ -87,16 +89,20 @@
               <div class="col-4 grid-margin" id="left-panel">
                 <div class="card">
                     <div class="card-body">
-                          <div class="row-lg" id="gamemap">
-                          <canvas id="canvas-map" width="150" height="150"></canvas>
-                          </div>
-                          <div class="row-lg" id="BUTTONS">
-                            <p>INSERT BUTTON HERE</p>
-                          </div>
+                      <div class="row-lg" id="gamemap">
+                        <canvas id="canvas-map" width="512" height="512"></canvas>
+                      </div>
+                      <div class="row-lg" id="BUTTONS">
+                        <button id= "playButton" type="button" class="btn btn-primary">Play!</button>
+                        <button id= "resetButton" type="button" class="btn btn-primary"  onclick="resetButton()">Reset Level!</button>
+                        <button id= "moveUpButton" type="button" class="btn btn-primary"  onclick="moveUpButton()">Move Up!</button>
+                        <button id= "moveDownButton" type="button" class="btn btn-primary"  onclick="moveDownButton()">Move Down!</button>
+                        <button id= "moveLeftButton" type="button" class="btn btn-primary"  onclick="moveLeftButton()">Move Left!</button>
+                        <button id= "moveRightButton" type="button" class="btn btn-primary"  onclick="moveRightButton()">Move Right!</button>
+                      </div>
                     </div>
                 </div>
               </div>
-
               <div class="col-8 grid-margin" id="right-panel">
                 <div class="card">
                   <div class="card-body">
@@ -136,6 +142,11 @@
     <script>
       var workspace = Blockly.inject('blocklyDiv',
           {toolbox: document.getElementById('toolbox')});
+    </script>
+    <script>
+      document.getElementById("playButton").addEventListener("click", function() {
+        alert("Play button");
+      });
     </script>
     <!-- container-scroller -->
     <!-- plugins:js -->
