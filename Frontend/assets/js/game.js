@@ -64,6 +64,7 @@ Blockly.Blocks['move_backward'] = {
 Blockly.JavaScript['move_forward'] = function(block) {
     var value_move_forward = Blockly.JavaScript.valueToCode(block, 'move_forward', Blockly.JavaScript.ORDER_ATOMIC);
     // TODO: Assemble JavaScript into code variable.
+    alert("block test");
     var code = '...';
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.JavaScript.ORDER_NONE];

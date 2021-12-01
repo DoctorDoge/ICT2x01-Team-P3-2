@@ -139,12 +139,20 @@
     </div>
     <!-- blockly scripts-->
     <script>
+      let currentButton;
       var workspace = Blockly.inject('blocklyDiv',
           {toolbox: document.getElementById('toolbox')});
-    </script>
-    <script>
-      document.getElementById("playButton").addEventListener("click", function() {
-        alert("Play button");
+          
+      //saving of the code from the blocks
+      document.getElementById("playButton").addEventListener("click", function(button) {
+        button.blocklyXml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
+        
+        let workspace = Blockly.getMainWorkspace();
+        workspace.clear();
+        if (button.blocklyXml) {
+          Blockly.Xml.domToWorkspace(button.blocklyXml, workspace);
+        }
+        alert(button.blocklyXml);
       });
     </script>
     <!-- container-scroller -->
