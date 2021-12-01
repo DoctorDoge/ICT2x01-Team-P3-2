@@ -15,7 +15,7 @@ var map = {
         5, 5, 5, 5, 5, 5, 5, 5,
         5, 5, 5, 5, 5, 5, 5, 5,
         5, 0, 0, 0, 0, 0, 0, 5,
-        5, 5, 5, 5, 5, 5, 5, 5,
+        5, 0, 0, 0, 0, 0, 0, 5,
         5, 5, 5, 5, 5, 5, 5, 5,
         5, 5, 5, 5, 5, 5, 5, 5,
         5, 5, 5, 5, 5, 5, 5, 5,
@@ -49,6 +49,8 @@ var map = {
         return row * this.tsize;
     }
 };
+
+var flag = 0;
 
 function Camera(map, width, height) {
     this.x = 0;
@@ -100,12 +102,10 @@ function Hero(map, x, y) {
     this.image = Loader.getImage('hero');
 }
 
-Hero.SPEED = 512; // pixels per second
-
 Hero.prototype.move = function (delta, dirx, diry) {
     // move hero
-    this.x += dirx * Hero.SPEED * delta;
-    this.y += diry * Hero.SPEED * delta;
+    this.x += dirx;
+    this.y += diry;
 
     // check if we walked into a non-walkable tile
     this._collide(dirx, diry);
@@ -160,23 +160,28 @@ Game.load = function () {
 };
 
 Game.init = function () {
-    Keyboard.listenForEvents(
-        [Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, Keyboard.DOWN]);
     this.tileAtlas = Loader.getImage('tiles');
 
-    this.hero = new Hero(map, 160, 160);
+    this.hero = new Hero(map, 96, 160);
     this.camera = new Camera(map, 512, 512);
     this.camera.follow(this.hero);
 };
 
 Game.update = function (delta) {
-    // handle hero movement with arrow keys
     var dirx = 0;
     var diry = 0;
-    if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }
-    else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
-    else if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
-    else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
+    
+    if (flag == 1) {
+        diry = -64; 
+    }else if (flag == 2) {
+        diry = 64; 
+    }else if (flag == 3) {
+        dirx = -64; 
+    }else if (flag == 4) {
+        dirx = 64; 
+    }
+
+    flag = 0;
 
     this.hero.move(delta, dirx, diry);
     this.camera.update();
@@ -249,3 +254,19 @@ Game.render = function () {
 
     this._drawGrid();
 };
+
+function moveUpButton() {
+    flag = 1;
+} 
+
+function moveDownButton() {
+    flag = 2;
+} 
+
+function moveLeftButton() {
+    flag = 3;
+} 
+
+function moveRightButton() {
+    flag = 4;
+} 
