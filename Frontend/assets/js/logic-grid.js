@@ -150,6 +150,9 @@ Hero.prototype._collide = function (dirx, diry) {
         col = this.map.getCol(left);
         this.x = this.width / 2 + this.map.getX(col + 1);
     }
+
+    alert("Collision found!");
+    resetButton();
 };
 
 Game.load = function () {
