@@ -114,7 +114,13 @@ Game.render = function () {};
 // start up function
 //
 
-window.onload = function () {
+window.onload = function test() {
     var context = document.getElementById('canvas-map').getContext('2d');
     Game.run(context);
 };
+
+function resetButton() {
+    var context = document.getElementById('canvas-map').getContext('2d');
+    Game.run(context);
+    alert("Level Reset!");
+} 

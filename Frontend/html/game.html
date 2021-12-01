@@ -18,12 +18,12 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../assets/images/favicon.ico" />
     <!--Blockly JS -->
-    <script src="common.js"></script>
-    <script src="logic-grid.js"></script>
     <script src="../node_modules/blockly/blockly_compressed.js"></script>
     <script src="../node_modules/blockly/blocks_compressed.js"></script>
     <script src="../node_modules/blockly/msg/en.js"></script>
     <script src="../assets/js/game.js"></script>
+    <script src="../assets/js/common.js"></script>
+    <script src="../assets/js/logic-grid.js"></script>
     <!--End Blockly JS -->
   </head>
   <body>
@@ -89,17 +89,16 @@
               <div class="col-4 grid-margin" id="left-panel">
                 <div class="card">
                     <div class="card-body">
-                          <div class="row-lg" id="gamemap">
-                          <canvas id="canvas-map" width="512" height="512"></canvas>
-                          </div>
-                          <div class="row-lg" id="BUTTONS">
-                            <p>INSERT BUTTON HERE</p>
-                          </div>
-                          
+                      <div class="row-lg" id="gamemap">
+                        <canvas id="canvas-map" width="512" height="512"></canvas>
+                      </div>
+                      <div class="row-lg" id="BUTTONS">
+                        <button id= "playButton" type="button" class="btn btn-primary">Play!</button>
+                        <button id= "resetButton" type="button" class="btn btn-primary"  onclick="resetButton()">Reset Level!</button>
+                      </div>
                     </div>
                 </div>
               </div>
-
               <div class="col-8 grid-margin" id="right-panel">
                 <div class="card">
                   <div class="card-body">
@@ -140,6 +139,11 @@
       var workspace = Blockly.inject('blocklyDiv',
           {toolbox: document.getElementById('toolbox')});
     </script>
+    <script>
+      document.getElementById("playButton").addEventListener("click", function() {
+        alert("Play button");
+      });
+      </script>
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="../assets/vendors/js/vendor.bundle.base.js"></script>

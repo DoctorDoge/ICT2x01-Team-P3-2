@@ -13,13 +13,13 @@ var map = {
         1, 1, 1, 1, 1, 1, 1, 1
     ], [
         5, 5, 5, 5, 5, 5, 5, 5,
-        5, 0, 0, 0, 0, 0, 0, 5,
-        5, 0, 0, 0, 0, 0, 0, 5,
-        5, 0, 0, 0, 0, 0, 0, 5,
-        5, 0, 0, 0, 0, 0, 0, 5,
-        5, 0, 0, 0, 0, 0, 0, 5,
+        5, 5, 5, 5, 5, 5, 5, 5,
         5, 0, 0, 0, 0, 0, 0, 5,
         5, 5, 5, 5, 5, 5, 5, 5,
+        5, 5, 5, 5, 5, 5, 5, 5,
+        5, 5, 5, 5, 5, 5, 5, 5,
+        5, 5, 5, 5, 5, 5, 5, 5,
+        5, 5, 5, 5, 5, 5, 5, 5
     ]],
     getTile: function (layer, col, row) {
         return this.layers[layer][row * map.cols + col];
@@ -104,11 +104,8 @@ Hero.SPEED = 512; // pixels per second
 
 Hero.prototype.move = function (delta, dirx, diry) {
     // move hero
-    // this.x += dirx * Hero.SPEED * delta;
-    // this.y += diry * Hero.SPEED * delta;
-    // test speed here
-    this.x += dirx * this.width / 8 ;
-    this.y += diry * this.width / 8 ;
+    this.x += dirx * Hero.SPEED * delta;
+    this.y += diry * Hero.SPEED * delta;
 
     // check if we walked into a non-walkable tile
     this._collide(dirx, diry);
@@ -157,8 +154,8 @@ Hero.prototype._collide = function (dirx, diry) {
 
 Game.load = function () {
     return [
-        Loader.loadImage('tiles', '../assets/tiles.png'),
-        Loader.loadImage('hero', '../assets/character.png')
+        Loader.loadImage('tiles', '../assets/images/tiles.png'),
+        Loader.loadImage('hero', '../assets/images/character.png')
     ];
 };
 
