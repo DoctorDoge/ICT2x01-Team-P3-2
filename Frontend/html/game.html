@@ -95,10 +95,9 @@
                       <div class="row-lg" id="BUTTONS">
                         <button id= "playButton" type="button" class="btn btn-primary">Play!</button>
                         <button id= "resetButton" type="button" class="btn btn-primary"  onclick="resetButton()">Reset Level!</button>
-                        <button id= "moveUpButton" type="button" class="btn btn-primary"  onclick="moveUpButton()">Move Up!</button>
-                        <button id= "moveDownButton" type="button" class="btn btn-primary"  onclick="moveDownButton()">Move Down!</button>
-                        <button id= "moveLeftButton" type="button" class="btn btn-primary"  onclick="moveLeftButton()">Move Left!</button>
-                        <button id= "moveRightButton" type="button" class="btn btn-primary"  onclick="moveRightButton()">Move Right!</button>
+                        <button id= "moveForwardButton" type="button" class="btn btn-primary"  onclick="moveForwardButton()">Move Forward!</button>
+                        <button id= "turnLeftButton" type="button" class="btn btn-primary"  onclick="turnLeftButton()">Turn Left!</button>
+                        <button id= "turnRightButton" type="button" class="btn btn-primary"  onclick="turnRightButton()">Turn Right!</button>
                       </div>
                     </div>
                 </div>
@@ -140,12 +139,20 @@
     </div>
     <!-- blockly scripts-->
     <script>
+      let currentButton;
       var workspace = Blockly.inject('blocklyDiv',
           {toolbox: document.getElementById('toolbox')});
-    </script>
-    <script>
-      document.getElementById("playButton").addEventListener("click", function() {
-        alert("Play button");
+          
+      //saving of the code from the blocks
+      document.getElementById("playButton").addEventListener("click", function(button) {
+        button.blocklyXml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
+        
+        let workspace = Blockly.getMainWorkspace();
+        workspace.clear();
+        if (button.blocklyXml) {
+          Blockly.Xml.domToWorkspace(button.blocklyXml, workspace);
+        }
+        alert(button.blocklyXml);
       });
     </script>
     <!-- container-scroller -->

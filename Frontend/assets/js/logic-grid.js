@@ -13,12 +13,12 @@ var map = {
         1, 1, 1, 1, 1, 1, 1, 1
     ], [
         5, 5, 5, 5, 5, 5, 5, 5,
-        5, 5, 5, 5, 5, 5, 5, 5,
+        5, 0, 0, 0, 0, 0, 0, 5,
+        5, 0, 0, 0, 0, 0, 2, 5,
         5, 0, 0, 0, 0, 0, 0, 5,
         5, 0, 0, 0, 0, 0, 0, 5,
-        5, 5, 5, 5, 5, 5, 5, 5,
-        5, 5, 5, 5, 5, 5, 5, 5,
-        5, 5, 5, 5, 5, 5, 5, 5,
+        5, 0, 0, 0, 0, 0, 0, 5,
+        5, 0, 0, 0, 0, 0, 0, 5,
         5, 5, 5, 5, 5, 5, 5, 5
     ]],
     getTile: function (layer, col, row) {
@@ -50,7 +50,8 @@ var map = {
     }
 };
 
-var directionFlag = 0;
+var moveFlag = 0;
+var directionFlag = 2;
 
 function Camera(map, width, height) {
     this.x = 0;
@@ -98,7 +99,6 @@ function Hero(map, x, y) {
     this.y = y;
     this.width = map.tsize;
     this.height = map.tsize;
-
     this.image = Loader.getImage('hero');
 }
 
@@ -151,8 +151,8 @@ Hero.prototype._collide = function (dirx, diry) {
         this.x = this.width / 2 + this.map.getX(col + 1);
     }
 
-    alert("Collision found!");
-    resetButton();
+    // alert("Collision found!");
+    // resetButton();
 };
 
 Game.load = function () {
@@ -174,17 +174,19 @@ Game.update = function (delta) {
     var dirx = 0;
     var diry = 0;
     
-    if (directionFlag == 1) {
-        diry = -64; 
-    }else if (directionFlag == 2) {
-        diry = 64; 
-    }else if (directionFlag == 3) {
-        dirx = -64; 
-    }else if (directionFlag == 4) {
-        dirx = 64; 
+    if (moveFlag == 1) {
+        if (directionFlag == 1) {
+            diry = 64; 
+        }else if (directionFlag == 2) {
+            dirx = 64; 
+        }else if (directionFlag == 3) {
+            diry = -64; 
+        }else if (directionFlag == 4) {
+            dirx = -64; 
+        }
     }
 
-    directionFlag = 0;
+    moveFlag = 0;
 
     this.hero.move(dirx, diry);
     this.camera.update();
@@ -258,18 +260,22 @@ Game.render = function () {
     this._drawGrid();
 };
 
-function moveUpButton() {
-    directionFlag = 1;
+function moveForwardButton() {
+    moveFlag = 1;
+}
+
+function turnLeftButton() {
+    directionFlag += 1;
+
+    if(directionFlag > 4){
+        directionFlag = 1;
+    }
 } 
 
-function moveDownButton() {
-    directionFlag = 2;
-} 
+function turnRightButton() {
+    directionFlag -= 1;
 
-function moveLeftButton() {
-    directionFlag = 3;
-} 
-
-function moveRightButton() {
-    directionFlag = 4;
+    if(directionFlag < 1){
+        directionFlag = 4;
+    }
 } 
