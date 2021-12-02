@@ -53,6 +53,13 @@ var map = {
 var moveFlag = 0;
 var directionFlag = 2;
 
+const FACING_RIGHT = 0;
+const FACING_LEFT = 75;
+const FACING_UP = 170;
+const FACING_DOWN = 350;
+
+let currentDirection = FACING_RIGHT;
+
 function Camera(map, width, height) {
     this.x = 0;
     this.y = 0;
@@ -137,6 +144,7 @@ Hero.prototype._collide = function (dirx, diry) {
     if (diry > 0) {
         row = this.map.getRow(bottom);
         this.y = -this.height / 2 + this.map.getY(row);
+
     }
     else if (diry < 0) {
         row = this.map.getRow(top);
@@ -158,7 +166,7 @@ Hero.prototype._collide = function (dirx, diry) {
 Game.load = function () {
     return [
         Loader.loadImage('tiles', '../assets/images/tiles.png'),
-        Loader.loadImage('hero', '../assets/images/character.png')
+        Loader.loadImage('hero', '../assets/images/car.png')
     ];
 };
 
@@ -176,13 +184,17 @@ Game.update = function (delta) {
     
     if (moveFlag == 1) {
         if (directionFlag == 1) {
-            diry = 64; 
+            diry = 64;
+            currentDirection = FACING_DOWN;
         }else if (directionFlag == 2) {
             dirx = 64; 
+            currentDirection = FACING_RIGHT;
         }else if (directionFlag == 3) {
             diry = -64; 
+            currentDirection = FACING_UP;
         }else if (directionFlag == 4) {
             dirx = -64; 
+            currentDirection = FACING_LEFT;
         }
     }
 
@@ -250,9 +262,9 @@ Game.render = function () {
 
     // draw main character
     this.ctx.drawImage(
-        this.hero.image,
+        this.hero.image, 0, currentDirection, 96, 80,
         this.hero.screenX - this.hero.width / 2,
-        this.hero.screenY - this.hero.height / 2);
+        this.hero.screenY - this.hero.height / 2, 64, 64);
 
     // draw map top layer
     this._drawLayer(1);
