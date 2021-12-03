@@ -45,6 +45,10 @@ app.use("/instructor_dashboard", instructor_dashboard);
 var login = require("./routers/login");
 app.use("/login", login);
 
+//Setting up login route
+var login = require("./routers/game");
+app.use("/game", login);
+
 //Setting up logout route
 app.use('/logout',(req,res)=>{
   req.logOut()
