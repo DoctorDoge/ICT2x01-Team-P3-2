@@ -318,8 +318,7 @@ function turnRightButton() {
 
 function resetButton() {
     resetFlags();
-    var context = document.getElementById('canvas-map').getContext('2d');
-    Game.run(context);
+    Game.init();
     alert("Resetting Level!");
 }
 
