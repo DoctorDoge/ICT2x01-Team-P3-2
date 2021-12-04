@@ -1,175 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Robo-Sensei</title>
-    <!-- plugins:css -->
-    <link rel="stylesheet" href="../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../assets/vendors/css/vendor.bundle.base.css">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
-    <!-- Layout styles -->
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <!-- End layout styles -->
-    <link rel="shortcut icon" href="../assets/images/favicon.ico" />
-    <!--Blockly JS -->
-    <script src="../node_modules/blockly/blockly_compressed.js"></script>
-    <script src="../node_modules/blockly/blocks_compressed.js"></script>
-    <script src="../node_modules/blockly/msg/en.js"></script>
-    <script src="../assets/js/game.js"></script>
-    <script src="../assets/js/common.js"></script>
-    <script src="../assets/js/logic-grid.js"></script>
-    <!--End Blockly JS -->
-  </head>
-  <body>
-    <div class="container-scroller">
-      <!-- partial:partials/_navbar.html -->
-      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href="index.html"><img src="../assets/images/logo.svg" alt="logo" /></a>
-          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../assets/images/logo-mini.svg" alt="logo" /></a>
-        </div>
-        <div class="navbar-menu-wrapper d-flex align-items-stretch">
-          <ul class="navbar-nav navbar-nav-right">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <span class="menu-title">Dashboard</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <span class="menu-title">Configuration</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <span class="menu-title">Design</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <span class="menu-title">Game</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <span class="menu-title">Switch Role</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
-        <!-- partial -->
-        <div class="main-panel">
-          <div class="content-wrapper">
-            <div class="page-header">
-              <h3 class="page-title">
-                <span class="page-title-icon bg-gradient-primary text-white mr-2">
-                  <i class="mdi mdi-home"></i>
-                </span> Dashboard
-              </h3>
 
-              <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                <div class="btn-group me-2" role="group" aria-label="First group">
-                  <button type="button" class="btn btn-primary">Level 1</button>
-                  <button type="button" class="btn btn-primary">Level 2</button>
-                  <button type="button" class="btn btn-primary">Level 3</button>
-                  <button type="button" class="btn btn-primary">Level 4</button>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Robo-Sensei</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../assets/vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../assets/vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <!-- endinject -->
+  <!-- Layout styles -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <!-- End layout styles -->
+  <link rel="shortcut icon" href="../assets/images/favicon.ico" />
+  <!--Blockly JS -->
+  <script src="../node_modules/blockly/blockly_compressed.js"></script>
+  <script src="../node_modules/blockly/blocks_compressed.js"></script>
+  <script src="../node_modules/blockly/javascript_compressed.js"></script>
+  <script src="../node_modules/blockly/msg/en.js"></script>
+  <script src="../assets/js/game.js"></script>
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/logic-grid.js"></script>
+  <script src="../assets/js/acorn_interpreter.js"></script>
+
+  <!--End Blockly JS -->
+</head>
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo" href="index.html"><img src="../assets/images/logo.svg" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../assets/images/logo-mini.svg"
+            alt="logo" /></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-stretch">
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <span class="menu-title">Configuration</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <span class="menu-title">Design</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <span class="menu-title">Game</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <span class="menu-title">Switch Role</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-home"></i>
+              </span> Dashboard
+            </h3>
+
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+              <div class="btn-group me-2" role="group" aria-label="First group">
+                <button type="button" class="btn btn-primary">Level 1</button>
+                <button type="button" class="btn btn-primary">Level 2</button>
+                <button type="button" class="btn btn-primary">Level 3</button>
+                <button type="button" class="btn btn-primary">Level 4</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5 grid-margin" id="left-panel">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row-lg" id="gamemap">
+                    <canvas id="canvas-map" width="512" height="512"></canvas>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-4 grid-margin" id="left-panel">
-                <div class="card">
-                    <div class="card-body">
-                      <div class="row-lg" id="gamemap">
-                        <canvas id="canvas-map" width="512" height="512"></canvas>
-                      </div>
-                      <div class="row-lg" id="BUTTONS">
-                        <button id= "playButton" type="button" class="btn btn-primary">Play!</button>
-                        <button id= "resetButton" type="button" class="btn btn-primary"  onclick="resetButton()">Reset Level!</button>
-                        <button id= "moveForwardButton" type="button" class="btn btn-primary"  onclick="moveForwardButton()">Move Forward!</button>
-                        <button id= "turnLeftButton" type="button" class="btn btn-primary"  onclick="turnLeftButton()">Turn Left!</button>
-                        <button id= "turnRightButton" type="button" class="btn btn-primary"  onclick="turnRightButton()">Turn Right!</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-              <div class="col-8 grid-margin" id="right-panel">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row" id="instructions">
-                      <p>INSERT INTRUCTIONS HERE</p>
-                    </div>
-                    <div class="row">
-                      <div id="blocklyDiv" style="height: 480px; width: 1000px;"></div>
-                      <xml id="toolbox" style="display: none">
-                        <block type="move_forward"></block>
-                        <block type="turn_left"></block>
-                        <block type="turn_right"></block>
-                        <block type="repeat_loop"></block>
-                        <block type="if_then"></block>
-                        <block type="if_then_else"></block>
-                      </xml>
-                    </div>
+            <div class="col-7 grid-margin" id="right-panel">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row" id="instructions">
+                    <p>INSERT INTRUCTIONS HERE</p>
+                  </div>
+                  <div class="row">
+                    <div id="blocklyDiv" style="height: 480px; width: 1000px;"></div>
+                    <xml id="toolbox" style="display: none;">
+                      <block type="move_forward"></block>
+                      <block type="turn_left"></block>
+                      <block type="turn_right"></block>
+                      <block type="repeat_loop"></block>
+                      <block type="if_then"></block>
+                      <block type="if_then_else"></block>
+                    </xml>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- content-wrapper ends -->
-          <!-- partial:partials/_footer.html -->
-          <footer class="footer">
-            <div class="container-fluid clearfix">
-              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Robo-Sensei 2021</span>
+          <div class="row w-100">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body d-flex justify-content-center">
+                  <div class="row text" id="BUTTONS">
+                    <button id="playButton" type="button" class="btn btn-primary mx-1"
+                      onclick="runCode()">Play!</button>
+                    <button id="resetButton" type="button" class="btn btn-primary mx-1" onclick="resetButton()">Reset
+                      Level!</button>
+                    <button id="moveForwardButton" type="button" class="btn btn-primary mx-1"
+                      onclick="moveForwardButton()">Move Forward!</button>
+                    <button id="turnLeftButton" type="button" class="btn btn-primary mx-1"
+                      onclick="turnLeftButton()">Turn Left!</button>
+                    <button id="turnRightButton" type="button" class="btn btn-primary mx-1"
+                      onclick="turnRightButton()">Turn Right!</button>
+                  </div>
+                </div>
+              </div>
             </div>
-          </footer>
-          <!-- partial -->
+          </div>
         </div>
-        <!-- main-panel ends -->
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="container-fluid clearfix">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Robo-Sensei
+              2021</span>
+          </div>
+        </footer>
+        <!-- partial -->
       </div>
-      <!-- page-body-wrapper ends -->
+      <!-- main-panel ends -->
     </div>
-    <!-- blockly scripts-->
-    <script>
-      let currentButton;
-      var workspace = Blockly.inject('blocklyDiv',
-          {toolbox: document.getElementById('toolbox')});
-          
-      //saving of the code from the blocks
-      document.getElementById("playButton").addEventListener("click", function(button) {
-        button.blocklyXml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
-        
-        let workspace = Blockly.getMainWorkspace();
-        workspace.clear();
-        if (button.blocklyXml) {
-          Blockly.Xml.domToWorkspace(button.blocklyXml, workspace);
-        }
-        alert(button.blocklyXml);
-      });
-    </script>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="../assets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <script src="../assets/vendors/chart.js/Chart.min.js"></script>
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="../assets/js/off-canvas.js"></script>
-    <script src="../assets/js/hoverable-collapse.js"></script>
-    <script src="../assets/js/misc.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
-    <script src="../assets/js/dashboard.js"></script>
-    <script src="../assets/js/todolist.js"></script>
-    <!-- End custom js for this page -->
-  </body>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- blockly scripts-->
+  <script>
+    // let currentButton;
+    // var workspace = Blockly.inject('blocklyDiv', {
+    //   toolbox: document.getElementById('toolbox')
+    // });
+
+    var workspace = Blockly.inject('blocklyDiv', {
+      toolbox: document.getElementById('toolbox')
+    });
+
+
+    function runCode() {
+      window.LoopTrap = 1000;
+      Blockly.JavaScript.INFINITE_LOOP_TRAP =
+        'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
+      eval(code);
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+
+      /*try{
+        eval(code);
+      } catch(e) {
+        alert("out of bound. please restart");
+      }*/
+    }
+    //   //saving of the code from the blocks
+    //   document.getElementById("playButton").addEventListener("click", function(button) {
+    //     window.LoopTrap = 1000;
+    // Blockly.JavaScript.INFINITE_LOOP_TRAP =
+    //   'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+    // var code = Blockly.JavaScript.workspaceToCode(workspace);
+    // Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    // eval(code);
+    //   });
+  </script>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="../assets/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="../assets/vendors/chart.js/Chart.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../assets/js/off-canvas.js"></script>
+  <script src="../assets/js/hoverable-collapse.js"></script>
+  <script src="../assets/js/misc.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page -->
+  <script src="../assets/js/dashboard.js"></script>
+  <script src="../assets/js/todolist.js"></script>
+  <!-- End custom js for this page -->
+</body>
+
 </html>

@@ -1,10 +1,9 @@
-
 Blockly.Blocks['move_forward'] = {
   init: function () {
     this.appendDummyInput()
       .appendField("Move Forward");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
     this.setColour(10);
     this.setTooltip("Moves the Robotic Car forward!");
     this.setHelpUrl("");
@@ -15,8 +14,8 @@ Blockly.Blocks['turn_left'] = {
   init: function () {
     this.appendDummyInput()
       .appendField("Turn Left");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
     this.setColour(70);
     this.setTooltip("Turns the Robotic Car left!");
     this.setHelpUrl("");
@@ -27,8 +26,8 @@ Blockly.Blocks['turn_right'] = {
   init: function () {
     this.appendDummyInput()
       .appendField("Turn Right");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
     this.setColour(130);
     this.setTooltip("Turns the Robotic Car right!");
     this.setHelpUrl("");
@@ -39,13 +38,17 @@ Blockly.Blocks['repeat_loop'] = {
   init: function () {
     this.appendDummyInput()
       .appendField("Repeat")
-      .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"]]), "number")
+      .appendField(new Blockly.FieldDropdown([
+        ["1", "1"],
+        ["2", "2"],
+        ["3", "3"]
+      ]), "number")
       .appendField("time(s)");
     this.appendStatementInput("do")
       .setCheck(null)
       .appendField("do");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
     this.setColour(190);
     this.setTooltip("Repeat the blocks!");
     this.setHelpUrl("");
@@ -56,7 +59,10 @@ Blockly.Blocks['if_then'] = {
   init: function () {
     this.appendDummyInput()
       .appendField("If path goes")
-      .appendField(new Blockly.FieldDropdown([["Left", "Left"], ["Right", "Right"]]), "direction");
+      .appendField(new Blockly.FieldDropdown([
+        ["Left", "Left"],
+        ["Right", "Right"]
+      ]), "direction");
     this.appendStatementInput("do")
       .setCheck(null)
       .appendField("do");
@@ -72,7 +78,10 @@ Blockly.Blocks['if_then_else'] = {
   init: function () {
     this.appendDummyInput()
       .appendField("If path goes")
-      .appendField(new Blockly.FieldDropdown([["Left", "Left"], ["Right", "Right"]]), "direction");
+      .appendField(new Blockly.FieldDropdown([
+        ["Left", "Left"],
+        ["Right", "Right"]
+      ]), "direction");
     this.appendStatementInput("do")
       .setCheck(null)
       .appendField("do");
@@ -87,59 +96,11 @@ Blockly.Blocks['if_then_else'] = {
   }
 };
 
-Blockly.JavaScript['move_forward'] = function (block) {
-  var value_move_forward = Blockly.JavaScript.valueToCode(block, 'move_forward', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
-  alert("block test");
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-Blockly.JavaScript['turn_left'] = function (block) {
-  var value_turn_left = Blockly.JavaScript.valueToCode(block, 'turn_left', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-Blockly.JavaScript['turn_right'] = function (block) {
-  var value_turn_right = Blockly.JavaScript.valueToCode(block, 'turn_right', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-Blockly.JavaScript['repeat_loop'] = function (block) {
-  var dropdown_number = block.getFieldValue('number');
-  var value_do = Blockly.JavaScript.valueToCode(block, 'do', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
-  return code;
-};
-
-Blockly.JavaScript['if_then'] = function (block) {
-  var dropdown_direction = block.getFieldValue('direction');
-  var value_do = Blockly.JavaScript.valueToCode(block, 'do', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
-  return code;
-};
-
-Blockly.JavaScript['if_then_else'] = function (block) {
-  var dropdown_direction = block.getFieldValue('direction');
-  var value_do = Blockly.JavaScript.valueToCode(block, 'do', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_else = Blockly.JavaScript.valueToCode(block, 'else', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
-  return code;
-};
 
 var sun = new Image();
 var moon = new Image();
 var earth = new Image();
+
 function init() {
   sun.src = 'canvas_sun.png';
   moon.src = 'canvas_moon.png';
@@ -184,3 +145,67 @@ function init() {
 // }
 
 // init();
+
+
+
+Blockly.JavaScript['move_forward'] = function (block) {
+  // var value_move_forward = Blockly.JavaScript.valueToCode(block, 'move_forward', Blockly.JavaScript.ORDER_ATOMIC);
+  // // TODO: Assemble JavaScript into code variable.
+  // var fo = moveForwardButton();
+  // console.log(fo)
+  // alert("block test");
+  // var code = '...';
+
+  // moveForwardButton();
+    var code = 'setTimeout(document.getElementById("moveForwardButton").click(), 3000);';
+  // code += 'sleep(500);';
+  // TODO: Change ORDER_NONE to the correct strength.
+  // return [code, Blockly.JavaScript.ORDER_NONE];
+  return code;
+};
+
+Blockly.JavaScript['turn_left'] = function (block) {
+  var value_turn_left = Blockly.JavaScript.valueToCode(block, 'turn_left', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  
+  var code = 'setTimeout(document.getElementById("turnLeftButton").click(), 3000);';
+  // code += 'document.getElementById("moveForwardButton").click();';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return code;
+};
+
+Blockly.JavaScript['turn_right'] = function (block) {
+  var value_turn_right = Blockly.JavaScript.valueToCode(block, 'turn_right', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'setTimeout(document.getElementById("turnRightButton").click(), 3000);';
+  // code += 'document.getElementById("moveForwardButton").click();';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return code;
+};
+
+Blockly.JavaScript['repeat_loop'] = function (block) {
+  var dropdown_number = block.getFieldValue('number');
+  var value_do = Blockly.JavaScript.valueToCode(block, 'do', Blockly.JavaScript.ORDER_ATOMIC);
+  var tmp = Blockly.JavaScript.statementToCode(block, 'DO');
+  console.log(tmp);
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};
+
+Blockly.JavaScript['if_then'] = function (block) {
+  var dropdown_direction = block.getFieldValue('direction');
+  var value_do = Blockly.JavaScript.valueToCode(block, 'do', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};
+
+Blockly.JavaScript['if_then_else'] = function (block) {
+  var dropdown_direction = block.getFieldValue('direction');
+  var value_do = Blockly.JavaScript.valueToCode(block, 'do', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_else = Blockly.JavaScript.valueToCode(block, 'else', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};

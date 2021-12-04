@@ -5,7 +5,7 @@ var map = {
     layers: [[
         1, 1, 1, 1, 1, 1, 1, 1,
         1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 2, 1,
         1, 1, 1, 1, 1, 1, 1, 1,
         1, 1, 1, 1, 1, 1, 1, 1,
         1, 1, 1, 1, 1, 1, 1, 1,
@@ -13,12 +13,12 @@ var map = {
         1, 1, 1, 1, 1, 1, 1, 1
     ], [
         5, 5, 5, 5, 5, 5, 5, 5,
-        5, 0, 0, 0, 0, 0, 0, 5,
-        5, 0, 0, 0, 0, 0, 2, 5,
-        5, 0, 0, 0, 0, 0, 0, 5,
-        5, 0, 0, 0, 0, 0, 0, 5,
-        5, 0, 0, 0, 0, 0, 0, 5,
-        5, 0, 0, 0, 0, 0, 0, 5,
+        5, 5, 5, 5, 5, 5, 5, 5,
+        5, 5, 5, 5, 5, 5, 0, 5,
+        5, 5, 5, 0, 0, 0, 0, 5,
+        5, 5, 5, 5, 5, 5, 5, 5,
+        5, 5, 5, 5, 5, 5, 5, 5,
+        5, 5, 5, 5, 5, 5, 5, 5,
         5, 5, 5, 5, 5, 5, 5, 5
     ]],
     getTile: function (layer, col, row) {
@@ -50,8 +50,20 @@ var map = {
     }
 };
 
+var flag1 = {
+    x: 416,
+    y: 160,
+    getX: function () {
+        return this.x;
+    },
+    getY: function () {
+        return this.y;
+    }
+};
+
 var moveFlag = 0;
 var directionFlag = 2;
+var reachedFlag = 0;
 
 const FACING_RIGHT = 0;
 const FACING_LEFT = 75;
@@ -159,9 +171,18 @@ Hero.prototype._collide = function (dirx, diry) {
         this.x = this.width / 2 + this.map.getX(col + 1);
     }
 
-    // alert("Collision found!");
-    // resetButton();
+    alert("Collision found!");
+    resetButton();
 };
+
+Game.isFlag = function () {
+    if(this.hero.x == flag1.getX() && this.hero.y == flag1.getY() && reachedFlag == 1){
+
+    } 
+    if(this.hero.x == flag1.getX() && this.hero.y == flag1.getY() && reachedFlag == 0){
+        reachedFlag = 1;
+    } 
+}
 
 Game.load = function () {
     return [
@@ -173,7 +194,7 @@ Game.load = function () {
 Game.init = function () {
     this.tileAtlas = Loader.getImage('tiles');
 
-    this.hero = new Hero(map, 96, 160);
+    this.hero = new Hero(map, 224, 224);
     this.camera = new Camera(map, 512, 512);
     this.camera.follow(this.hero);
 };
@@ -202,6 +223,7 @@ Game.update = function (delta) {
 
     this.hero.move(dirx, diry);
     this.camera.update();
+    this.isFlag();
 };
 
 Game._drawLayer = function (layer) {
@@ -274,20 +296,47 @@ Game.render = function () {
 
 function moveForwardButton() {
     moveFlag = 1;
+    Game.update();
+
 }
 
 function turnLeftButton() {
-    directionFlag += 1;
+        moveFlag = 1;
 
+    directionFlag += 1;
     if(directionFlag > 4){
         directionFlag = 1;
     }
 } 
 
 function turnRightButton() {
+        moveFlag = 1;
+
     directionFlag -= 1;
 
     if(directionFlag < 1){
         directionFlag = 4;
     }
-} 
+}
+
+function resetButton() {
+    resetFlags();
+    Game.init();
+
+    alert("Resetting Level!");
+}
+
+function resetFlags(){
+    moveFlag = 0;
+    directionFlag = 2;
+    currentDirection = FACING_RIGHT;
+    reachedFlag = 0;
+}
+
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
