@@ -319,8 +319,16 @@ function turnRightButton() {
 function resetButton() {
     resetFlags();
     Game.init();
-    alert("Resetting Level!");
+    var modal = document.getElementById("myModal");
+    modal.style.display = "block";
 }
+
+// var span = document.getElementsByClassName("close")[0];
+
+// document.getElementsByClassName("close").onclick = function() {
+//     alert("test");
+//     modal.style.display = "none";
+// }
 
 function resetFlags(){
     moveFlag = 0;
