@@ -171,13 +171,13 @@ Hero.prototype._collide = function (dirx, diry) {
         this.x = this.width / 2 + this.map.getX(col + 1);
     }
 
-    alert("Collision found!");
+    document.getElementById("collisionModal").style.display = "block";
     resetButton();
 };
 
 Game.isFlag = function () {
     if(this.hero.x == flag1.getX() && this.hero.y == flag1.getY() && reachedFlag == 1){
-        alert("Reached Destination");
+        document.getElementById("completedModal").style.display = "block";
     
         resetButton();
     } 
@@ -319,16 +319,7 @@ function turnRightButton() {
 function resetButton() {
     resetFlags();
     Game.init();
-    var modal = document.getElementById("myModal");
-    modal.style.display = "block";
 }
-
-// var span = document.getElementsByClassName("close")[0];
-
-// document.getElementsByClassName("close").onclick = function() {
-//     alert("test");
-//     modal.style.display = "none";
-// }
 
 function resetFlags(){
     moveFlag = 0;
