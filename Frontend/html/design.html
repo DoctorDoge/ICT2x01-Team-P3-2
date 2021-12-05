@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Robo-Sensei</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="../assets/images/favicon.ico" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="index.html"><img src="../assets/images/logo.svg" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../assets/images/logo-mini.svg" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item">
+              <a class="nav-link" href="instructor.html">
+                <span class="menu-title">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="configuration.html">
+                <span class="menu-title">Configuration</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="design.html">
+                <span class="menu-title">Design</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="game.html">
+                <span class="menu-title">Game</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">
+                <span class="menu-title">Switch Role</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="page-header">
+              <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                  <i class="mdi mdi-home"></i>
+                </span> Design Map
+              </h3>
+            </div>
+            <div class="row">
+              <div class="col-12 grid-margin" id="left-panel">
+                <div class="card">
+                    <div class="card-body">
+                      <canvas id='myCanvas' width='600' height='800'></canvas>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:partials/_footer.html -->
+          <footer class="footer">
+            <div class="container-fluid clearfix">
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Robo-Sensei 2021</span>
+            </div>
+          </footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <script>
+      let image = new Image();
+      image.src = '../assets/images/tiles.png';
+      const tileWidth = 64,
+        tileHeight = 64;
+      const mapRows = 8,
+        mapColumns = 8;
+      const sourceWidth = 320,
+        sourceHeight = 64;
+      let tiles = new Array(mapColumns * mapRows);
+      let mapHeight = mapRows * tileHeight;
+      let mapWidth = mapColumns * tileWidth;
+      let sourceX, sourceY, sourceTile;
+      let canvas = document.getElementById('myCanvas');
+      let context = canvas.getContext('2d');
+      let mouseDown;
+      canvas.addEventListener('mousedown', doMouseDown);
+      document.addEventListener('contextmenu', event => event.preventDefault());
+      canvas.addEventListener('mousemove', doMouseMove);
+      canvas.addEventListener('click', doMouseClick);
+      canvas.addEventListener('mouseup', doMouseUp);
+      image.addEventListener('load', redrawSource);
+      // draw the grid
+       
+      for (let i = 0; i <= mapColumns; i++) {
+        context.moveTo(i * tileWidth, 0);
+        context.lineTo(i * tileWidth, mapHeight);
+      }
+      context.stroke();
+      for (let i = 0; i <= mapRows; i++) {
+        context.moveTo(0, i * tileHeight);
+        context.lineTo(mapWidth, i * tileHeight);
+      }
+      context.stroke();
+       
+      function redrawSource() {
+        context.drawImage(image, 0, 0, sourceWidth, sourceHeight, 0, mapHeight, sourceWidth, sourceHeight);
+      }
+       
+      function doMouseUp(e) {
+        mouseDown = false;
+        // update the string    
+        let string = 'let tiles = [';
+        for (let i = 0; i < mapColumns * mapRows; i++) {
+          if (tiles[i] != undefined) string = string + tiles[i];
+          string = string + ',';
+        }
+        string = string + '];';
+        document.getElementById('result').innerHTML = string;
+      }
+       
+      function doMouseDown(e) {
+        mouseDown = true;
+        let x = e.clientX;
+        let y = e.clientY;
+        let gridX = Math.floor(x / tileWidth) * tileWidth;
+        let gridY = Math.floor(y / tileHeight) * tileHeight;
+       
+        if (y > mapHeight && y < (mapHeight + sourceHeight) && x < sourceWidth) { // source
+          let tileX = Math.floor(x / tileWidth);
+          let tileY = Math.floor((y - mapHeight) / tileHeight);
+          sourceTile = tileY * (sourceWidth / tileWidth) + tileX;
+          sourceX = gridX;
+          sourceY = gridY - mapHeight;
+          redrawSource();
+          drawBox();
+        }
+      }
+       
+      function doMouseMove(e) {
+        let x = e.clientX;
+        let y = e.clientY;
+        let gridX, gridY;
+        gridX = Math.floor(x / tileWidth) * tileWidth;
+        gridY = Math.floor(y / tileHeight) * tileHeight;
+       
+       
+        if (y > mapHeight && y < (mapHeight + sourceHeight) && x < sourceWidth) { // source
+          context.clearRect(0, mapHeight, sourceWidth, sourceHeight);
+          redrawSource();
+          context.beginPath();
+          context.strokeStyle = 'blue';
+          context.rect(gridX, gridY, tileWidth, tileHeight);
+          context.stroke();
+          drawBox();
+       
+        }
+       
+        if (mouseDown == true) drawTile(e);
+      }
+       
+      function drawBox() {
+        context.beginPath();
+        context.strokeStyle = 'red';
+        context.rect(sourceX, sourceY + mapHeight, tileWidth, tileHeight);
+        context.stroke();
+      }
+       
+      function doMouseClick(e) {
+        drawTile(e);
+      }
+       
+      function drawTile(e) {
+        let x = e.clientX;
+        let y = e.clientY;
+        let gridX, gridY;
+        gridX = Math.floor(x / tileWidth) * tileWidth;
+        gridY = Math.floor(y / tileHeight) * tileHeight;
+        if (y < mapHeight && x < mapWidth) { // target
+          context.clearRect(gridX, gridY, tileWidth, tileHeight);
+          context.drawImage(image, sourceX, sourceY, tileWidth, tileHeight, gridX, gridY, tileWidth, tileHeight);
+          let tileX = Math.floor(x / tileWidth);
+          let tileY = Math.floor(y / tileHeight);
+          let targetTile = tileY * mapColumns + tileX;
+          tiles[targetTile] = sourceTile;
+          if (e.button == 2) {
+            context.clearRect(gridX, gridY, tileWidth, tileHeight);
+            context.beginPath();
+            context.strokeStyle = 'black';
+            context.rect(gridX, gridY, tileWidth, tileHeight);
+            context.stroke();
+            tiles[targetTile] = null
+          };
+        }
+      }
+    </script>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="../assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="../assets/vendors/chart.js/Chart.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../assets/js/off-canvas.js"></script>
+    <script src="../assets/js/hoverable-collapse.js"></script>
+    <script src="../assets/js/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="../assets/js/dashboard.js"></script>
+    <script src="../assets/js/todolist.js"></script>
+    <!-- End custom js for this page -->
+  </body>
+</html>
