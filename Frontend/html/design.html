@@ -144,8 +144,8 @@
        
       function doMouseDown(e) {
         mouseDown = true;
-        let x = e.clientX;
-        let y = e.clientY;
+        let x = e.clientX - 64;
+        let y = e.clientY - 192;
         let gridX = Math.floor(x / tileWidth) * tileWidth;
         let gridY = Math.floor(y / tileHeight) * tileHeight;
        
@@ -161,8 +161,8 @@
       }
        
       function doMouseMove(e) {
-        let x = e.clientX;
-        let y = e.clientY;
+        let x = e.clientX - 64;
+        let y = e.clientY - 192;
         let gridX, gridY;
         gridX = Math.floor(x / tileWidth) * tileWidth;
         gridY = Math.floor(y / tileHeight) * tileHeight;
@@ -194,8 +194,8 @@
       }
        
       function drawTile(e) {
-        let x = e.clientX;
-        let y = e.clientY;
+        let x = e.clientX - 64;
+        let y = e.clientY - 192;
         let gridX, gridY;
         gridX = Math.floor(x / tileWidth) * tileWidth;
         gridY = Math.floor(y / tileHeight) * tileHeight;
