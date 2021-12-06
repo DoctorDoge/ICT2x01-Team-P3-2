@@ -28,11 +28,11 @@ var map = {
         var col = Math.floor(x / this.tsize);
         var row = Math.floor(y / this.tsize);
 
-        // tiles 3 and 5 are solid -- the rest are walkable
+        // tile 5 is solid -- the rest are walkable
         // loop through all layers and return TRUE if any tile is solid
         return this.layers.reduce(function (res, layer, index) {
             var tile = this.getTile(index, col, row);
-            var isSolid = tile === 3 || tile === 5;
+            var isSolid = tile === 5;
             return res || isSolid;
         }.bind(this), false);
     },
@@ -50,6 +50,7 @@ var map = {
     }
 };
 
+// level 1 spawn locations
 var spawn = {
     startX: 96,
     startY: 160,
@@ -109,17 +110,17 @@ Camera.prototype.update = function () {
     }
 };
 
-function Hero(map, x, y) {
+function Car(map, x, y) {
     this.map = map;
     this.x = x;
     this.y = y;
     this.width = map.tsize;
     this.height = map.tsize;
-    this.image = Loader.getImage('hero');
+    this.image = Loader.getImage('car');
 }
 
-Hero.prototype.move = function (dirx, diry) {
-    // move hero
+Car.prototype.move = function (dirx, diry) {
+    // move car
     this.x += dirx;
     this.y += diry;
 
@@ -133,7 +134,7 @@ Hero.prototype.move = function (dirx, diry) {
     this.y = Math.max(0, Math.min(this.y, maxY));
 };
 
-Hero.prototype._collide = function (dirx, diry) {
+Car.prototype._collide = function (dirx, diry) {
     var row, col;
     // -1 in right and bottom is because image ranges from 0..63
     // and not up to 64
@@ -172,31 +173,35 @@ Hero.prototype._collide = function (dirx, diry) {
     resetButton();
 };
 
+// check if destination is reached
 Game.isFlag = function () {
-    if(this.hero.x == spawn.endX && this.hero.y == spawn.endY && reachedFlag == 1){
+    if(this.car.x == spawn.endX && this.car.y == spawn.endY && reachedFlag == 1){
         document.getElementById("completedModal").style.display = "block";
     
         resetButton();
     } 
-    if(this.hero.x == spawn.endX && this.hero.y == spawn.endY && reachedFlag == 0){
+    if(this.car.x == spawn.endX && this.car.y == spawn.endY && reachedFlag == 0){
         reachedFlag = 1;
     } 
 }
 
+// load images
 Game.load = function () {
     return [
         Loader.loadImage('tiles', '../assets/images/tiles.png'),
-        Loader.loadImage('hero', '../assets/images/car.png')
+        Loader.loadImage('car', '../assets/images/car.png')
     ];
 };
 
+// start game
 Game.init = function () {
     this.tileAtlas = Loader.getImage('tiles');
 
-    this.hero = new Hero(map, spawn.startX, spawn.startY);
+    this.car = new Car(map, spawn.startX, spawn.startY);
     this.camera = new Camera(map, 512, 512);
-    this.camera.follow(this.hero);
+    this.camera.follow(this.car);
 
+    // load tutorial
     if(level == 1){
         document.getElementById("tutorial1Modal").style.display = "block";
     }
@@ -206,6 +211,7 @@ Game.update = function (delta) {
     var dirx = 0;
     var diry = 0;
     
+    // turn car direction
     if (moveFlag == 1) {
         if (directionFlag == 1) {
             diry = 64;
@@ -224,7 +230,7 @@ Game.update = function (delta) {
 
     moveFlag = 0;
 
-    this.hero.move(dirx, diry);
+    this.car.move(dirx, diry);
     this.camera.update();
     this.isFlag();
 };
@@ -287,9 +293,9 @@ Game.render = function () {
 
     // draw main character
     this.ctx.drawImage(
-        this.hero.image, 0, currentDirection, 96, 80,
-        this.hero.screenX - this.hero.width / 2,
-        this.hero.screenY - this.hero.height / 2, 64, 64);
+        this.car.image, 0, currentDirection, 96, 80,
+        this.car.screenX - this.car.width / 2,
+        this.car.screenY - this.car.height / 2, 64, 64);
 
     // draw map top layer
     this._drawLayer(1);
