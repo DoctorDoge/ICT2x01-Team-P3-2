@@ -188,6 +188,7 @@
       let canvas = document.getElementById('myCanvas');
       let context = canvas.getContext('2d');
       let mouseDown;
+      let saveString;
       canvas.addEventListener('mousedown', doMouseDown);
       document.addEventListener('contextmenu', event => event.preventDefault());
       canvas.addEventListener('mousemove', doMouseMove);
@@ -214,13 +215,17 @@
       function doMouseUp(e) {
         mouseDown = false;
         // update the string    
-        let string = 'let tiles = [';
+        let levelString = '[';
         for (let i = 0; i < mapColumns * mapRows; i++) {
-          if (tiles[i] != undefined) string = string + tiles[i];
-          string = string + ',';
+          if (tiles[i] != undefined) levelString = levelString + tiles[i];
+          levelString = levelString + ',';
         }
-        string = string + '];';
-        document.getElementById('result').innerHTML = string;
+        levelString = levelString + '];';
+
+        if(levelString.length == 131){
+          saveString = levelString;
+          alert(saveString);
+        }
       }
        
       function doMouseDown(e) {
