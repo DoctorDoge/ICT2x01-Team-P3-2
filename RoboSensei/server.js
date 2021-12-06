@@ -70,8 +70,8 @@ var instructor_dashboard = require("./routers/instructor_dashboard");
 app.use("/instructor_dashboard", instructor_dashboard);
 
 //Setting up login route
-var login = require("./routers/login");
-app.use("/login", login);
+var login = require("./routers/account");
+app.use("/account", login);
 
 //Setting up login route
 var login = require("./routers/game");

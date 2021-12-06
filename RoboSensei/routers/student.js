@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     if(req.isAuthenticated()){
         req.logOut();
     }
-    res.render('student');
+    res.redirect('/game');
 })
 
 

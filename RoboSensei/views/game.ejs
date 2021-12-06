@@ -52,13 +52,13 @@
                 <span class="menu-title">Configuration</span>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" hidden>
               <a class="nav-link" href="instructor_dashboard/design">
                 <span class="menu-title">Design</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="game">
+              <a class="nav-link" href="">
                 <span class="menu-title">Game</span>
               </a>
             </li>
@@ -72,14 +72,14 @@
                 <a class="dropdown-item" href="instructor_dashboard">
                   <i class="mdi mdi-cached mr-2 text-success"></i> Instructor </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="student">
+                <a class="dropdown-item" href="../student">
                   <i class="mdi mdi-cached mr-2 text-success"></i> Student </a>
               </div>
             </li>
           </ul>
         </div>
       </nav>
-      <!-- partial -->
+     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial -->
       <div class="main-panel">
@@ -93,10 +93,10 @@
 
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
               <div class="btn-group me-2" role="group" aria-label="First group">
-                <button type="button" class="btn btn-primary">Level 1</button>
-                <button type="button" class="btn btn-primary">Level 2</button>
-                <button type="button" class="btn btn-primary">Level 3</button>
-                <button type="button" class="btn btn-primary">Level 4</button>
+                <button type="button" class="btn btn-primary" onclick="level1()">Level 1</button>
+                <button type="button" class="btn btn-primary" onclick="level2()">Level 2</button>
+                <button type="button" class="btn btn-primary" onclick="level3()">Level 3</button>
+                <button type="button" class="btn btn-primary" onclick="level4()">Level 4</button>
               </div>
             </div>
           </div>
@@ -127,15 +127,6 @@
                 </div>
               </div>
             </div>
-
-            <div class="col-2 grid-margin" id="history-panel">
-              <div class="card right">
-                <h5 class="card-header">Previous Command</h5>
-                <div class="card-body">
-                  <div id="history"></div>
-                </div>
-              </div>
-            </div>
           </div>
           <div class="row w-100">
             <div class="col-12 grid-margin">
@@ -156,6 +147,14 @@
                 </div>
               </div>
             </div>
+                        <div class="col-12 grid-margin" id="history-panel">
+              <div class="card right">
+                <h5 class="card-header">Previous Command</h5>
+                <div class="card-body">
+                  <div id="history"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <!-- content-wrapper ends -->
@@ -172,6 +171,38 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
+  <!-- modal content -->
+    <div id="collisionModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Collision Detected!</p>
+        <p>Resetting Level!</p>
+      </div>
+    </div>
+    <div id="completedModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Level Completed!</p>
+      </div>
+    </div>
+    <div id="tutorial1Modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Tutorial:</p>
+        <br>
+        <p>Drag-and-drop blocks to chain commands!</p>
+        <p>Use commands to move the car to its destination!</p>
+      </div>
+    </div>
+    <div id="tutorial2Modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Tutorial:</p>
+        <br>
+        <p>Click on the Play button to execute commands!</p>
+        <p>Click on the Reset button to move the car back to the starting position!</p>
+      </div>
+    </div>
   <!-- blockly scripts-->
   <script>
     var workspace = Blockly.inject('blocklyDiv', {
@@ -186,7 +217,6 @@
         document.getElementById("history").innerHTML = "Sorry, your browser does not support Web Storage...";
       }  
     }
-
     function runCode() {
       window.LoopTrap = 1000;
       Blockly.JavaScript.INFINITE_LOOP_TRAP =
@@ -200,6 +230,52 @@
     }
    
   </script>
+  <!-- modal scripts-->
+    <script>
+      var collisionModal = document.getElementById("collisionModal");
+      var collisionSpan = document.getElementsByClassName("close")[0];
+      var completedModal = document.getElementById("completedModal");
+      var completedSpan = document.getElementsByClassName("close")[1];
+
+      var tutorial1Modal = document.getElementById("tutorial1Modal");
+      var tutorial1Span = document.getElementsByClassName("close")[2];
+      var tutorial2Modal = document.getElementById("tutorial2Modal");
+      var tutorial2Span = document.getElementsByClassName("close")[3];
+
+      collisionSpan.onclick = function() {
+        collisionModal.style.display = "none";
+      }
+
+      completedSpan.onclick = function() {
+        completedModal.style.display = "none";
+      }
+
+      tutorial1Span.onclick = function() {
+        tutorial1Modal.style.display = "none";
+      }
+
+      tutorial2Span.onclick = function() {
+        tutorial2Modal.style.display = "none";
+        document.getElementById("tutorial2Modal").style.display = "block";
+      }
+
+      window.onclick = function(event) {
+        if (event.target == collisionModal) {
+          collisionModal.style.display = "none";
+        }
+        if (event.target == completedModal) {
+          completedModal.style.display = "none";
+        }
+        if (event.target == tutorial1Modal) {
+          tutorial1Modal.style.display = "none";
+          document.getElementById("tutorial2Modal").style.display = "block";
+        }
+        if (event.target == tutorial2Modal) {
+          tutorial2Modal.style.display = "none";
+        }
+      } 
+    </script>
+  
   <!-- container-scroller -->
   <!-- plugins:js -->
   <script src="../assets/vendors/js/vendor.bundle.base.js"></script>

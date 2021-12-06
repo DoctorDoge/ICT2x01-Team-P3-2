@@ -54,6 +54,29 @@ router.post("/", async (req, res) => {
     }
 })
 
+//Login Function
+router.post("/updatePass", async (req, res) => {
+    try {
+        const salt = await bcrypt.genSaltSync(10);
+        // now we set user password to hashed password
+        const password = await bcrypt.hashSync(req.body.password, salt);
+
+        await User.updateOne({
+            userId: req._id
+        }, {
+            $set: {
+                password: password
+            }
+        }).exec();
+        
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send(err);
+
+    }
+})
+
 passport.serializeUser(function (user, done) {
     console.log(user)
     done(null, user);
