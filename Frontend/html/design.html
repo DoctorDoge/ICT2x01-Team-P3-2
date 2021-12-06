@@ -237,7 +237,7 @@
         if (y > mapHeight && y < (mapHeight + sourceHeight) && x < sourceWidth) { // source
           let tileX = Math.floor(x / tileWidth);
           let tileY = Math.floor((y - mapHeight) / tileHeight);
-          sourceTile = tileY * (sourceWidth / tileWidth) + tileX + 1;
+          sourceTile = tileY * (sourceWidth / tileWidth) + tileX;
           sourceX = gridX;
           sourceY = gridY - mapHeight;
           redrawSource();

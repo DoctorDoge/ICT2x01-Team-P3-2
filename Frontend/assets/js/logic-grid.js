@@ -62,6 +62,7 @@ var level = 1;
 var moveFlag = 0;
 var directionFlag = 2;
 var reachedFlag = 0;
+var tutorialFlag = 0;
 
 const FACING_RIGHT = 0;
 const FACING_LEFT = 75;
@@ -202,8 +203,9 @@ Game.init = function () {
     this.camera.follow(this.car);
 
     // load tutorial
-    if(level == 1){
+    if(tutorialFlag == 0){
         document.getElementById("tutorial1Modal").style.display = "block";
+        tutorialFlag = 1;
     }
 };
 
@@ -449,6 +451,30 @@ function loadLevel() {
     }
 }
 
+// insert DB functions into this part
+var saveString = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,];
+function loadButton(){        
+    map.layers = 
+    [[
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+    ], saveString];
+    resetFlags();
+        
+    spawn.startX = (3 - 0.5) * 64;
+    spawn.startY = (3 - 0.5) * 64;
+    spawn.endX = (6 - 0.5) * 64;
+    spawn.endY = (5 - 0.5) * 64;
+        
+    Game.init();
+}
+
 function moveForwardButton() {
     moveFlag = 1;
 }
@@ -479,18 +505,4 @@ function resetFlags(){
     directionFlag = 2;
     currentDirection = FACING_RIGHT;
     reachedFlag = 0;
-}
-
-function loadButton(){
-    map.layers = 
-        [[
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1, 1, 1, 1,
-        ], saveString];
 }
