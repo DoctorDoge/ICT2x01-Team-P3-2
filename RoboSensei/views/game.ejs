@@ -92,7 +92,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-5 grid-margin" id="left-panel">
+            <div class="col-4 grid-margin" id="left-panel">
               <div class="card">
                 <div class="card-body">
                   <div class="row-lg" id="gamemap">
@@ -101,7 +101,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-7 grid-margin" id="right-panel">
+            <div class="col-6 grid-margin" id="right-panel">
               <div class="card">
                 <div class="card-body">
                   <div class="row" id="instructions">
@@ -115,6 +115,15 @@
                       <block type="turn_right"></block>
                     </xml>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-2 grid-margin" id="history-panel">
+              <div class="card right">
+                <h5 class="card-header">Previous Command</h5>
+                <div class="card-body">
+                  <div id="history"></div>
                 </div>
               </div>
             </div>
@@ -159,7 +168,15 @@
     var workspace = Blockly.inject('blocklyDiv', {
       toolbox: document.getElementById('toolbox')
     });
-
+    
+    function storeCommands(code){
+      if (typeof(Storage) !== "undefined") {
+        localStorage.setItem("commands", code);
+        document.getElementById("history").innerHTML = localStorage.getItem("commands");
+      } else {
+        document.getElementById("history").innerHTML = "Sorry, your browser does not support Web Storage...";
+      }  
+    }
 
     function runCode() {
       window.LoopTrap = 1000;
@@ -167,7 +184,7 @@
         'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
       var code = Blockly.JavaScript.workspaceToCode(workspace);
       console.log(code);
-
+      storeCommands(code);
       runOne(code);
       // eval(code);
       Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
