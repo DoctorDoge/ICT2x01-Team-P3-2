@@ -27,7 +27,6 @@ router.post("/", async (req, res) => {
     //User is found
     if (user) {
         //Password Match
-        try {
             for (let i = 0; i < user.length; i++) {
                 if (bcrypt.compareSync(req.body.password, user[i].password)) {
                     req.login(user[i], function (err) {
@@ -37,12 +36,9 @@ router.post("/", async (req, res) => {
                     })
                 }
             }
-        } catch (e) {
-            // statements to handle any exceptions
-            res.status(401).render('login', {
-                error: e
-            });
-        }
+        
+          
+        
 
     } else {
         //User not found
