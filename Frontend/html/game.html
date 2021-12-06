@@ -37,29 +37,23 @@
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <span class="menu-title">Dashboard</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <span class="menu-title">Configuration</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <span class="menu-title">Design</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">
+              <a class="nav-link" href="game.html">
                 <span class="menu-title">Game</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <span class="menu-title">Switch Role</span>
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <div class="nav-profile-text">
+                  <p class="mb-1">Switch Role</p>
+                </div>
               </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item" href="instructor.html">
+                  <i class="mdi mdi-cached mr-2 text-success"></i> Instructor </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="student.html">
+                  <i class="mdi mdi-cached mr-2 text-success"></i> Student </a>
+              </div>
             </li>
           </ul>
         </div>
@@ -73,7 +67,7 @@
               <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white mr-2">
                   <i class="mdi mdi-home"></i>
-                </span> Dashboard
+                </span> Play Game
               </h3>
 
               <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -98,6 +92,7 @@
                         <button id= "moveForwardButton" type="button" class="btn btn-primary"  onclick="moveForwardButton()">Move Forward!</button>
                         <button id= "turnLeftButton" type="button" class="btn btn-primary"  onclick="turnLeftButton()">Turn Left!</button>
                         <button id= "turnRightButton" type="button" class="btn btn-primary"  onclick="turnRightButton()">Turn Right!</button>
+                        <button id= "loadButton" type="button" class="btn btn-primary"  onclick="loadButton()">Load Map!</button>
                       </div>
                     </div>
                 </div>
@@ -105,9 +100,6 @@
               <div class="col-8 grid-margin" id="right-panel">
                 <div class="card">
                   <div class="card-body">
-                    <div class="row" id="instructions">
-                      <p>INSERT INTRUCTIONS HERE</p>
-                    </div>
                     <div class="row">
                       <div id="blocklyDiv" style="height: 480px; width: 1000px;"></div>
                       <xml id="toolbox" style="display: none">
@@ -151,6 +143,24 @@
         <p>Level Completed!</p>
       </div>
     </div>
+    <div id="tutorial1Modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Tutorial:</p>
+        <br>
+        <p>Drag-and-drop blocks to chain commands!</p>
+        <p>Use commands to move the car to its destination!</p>
+      </div>
+    </div>
+    <div id="tutorial2Modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Tutorial:</p>
+        <br>
+        <p>Click on the Play button to execute commands!</p>
+        <p>Click on the Reset button to move the car back to the starting position!</p>
+      </div>
+    </div>
     <!-- blockly scripts-->
     <script>
       let currentButton;
@@ -176,6 +186,11 @@
       var completedModal = document.getElementById("completedModal");
       var completedSpan = document.getElementsByClassName("close")[1];
 
+      var tutorial1Modal = document.getElementById("tutorial1Modal");
+      var tutorial1Span = document.getElementsByClassName("close")[2];
+      var tutorial2Modal = document.getElementById("tutorial2Modal");
+      var tutorial2Span = document.getElementsByClassName("close")[3];
+
       collisionSpan.onclick = function() {
         collisionModal.style.display = "none";
       }
@@ -184,12 +199,28 @@
         completedModal.style.display = "none";
       }
 
+      tutorial1Span.onclick = function() {
+        tutorial1Modal.style.display = "none";
+      }
+
+      tutorial2Span.onclick = function() {
+        tutorial2Modal.style.display = "none";
+        document.getElementById("tutorial2Modal").style.display = "block";
+      }
+
       window.onclick = function(event) {
         if (event.target == collisionModal) {
           collisionModal.style.display = "none";
         }
         if (event.target == completedModal) {
           completedModal.style.display = "none";
+        }
+        if (event.target == tutorial1Modal) {
+          tutorial1Modal.style.display = "none";
+          document.getElementById("tutorial2Modal").style.display = "block";
+        }
+        if (event.target == tutorial2Modal) {
+          tutorial2Modal.style.display = "none";
         }
       } 
     </script>
