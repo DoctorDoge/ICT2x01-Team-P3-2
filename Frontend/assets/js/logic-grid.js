@@ -196,6 +196,10 @@ Game.init = function () {
     this.hero = new Hero(map, spawn.startX, spawn.startY);
     this.camera = new Camera(map, 512, 512);
     this.camera.follow(this.hero);
+
+    if(level == 1){
+        document.getElementById("tutorial1Modal").style.display = "block";
+    }
 };
 
 Game.update = function (delta) {
