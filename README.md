@@ -1,3 +1,7 @@
+# Robo-Sensei
+Robo-Sensei is a project that aims to educate user critical problem solving and computational thinking skills using robotic car with the customizable controls from the web portal.
+
+
 # Development Team Members
 ```
 DoctorDoge -  Lee Zhi Yang Aloysius
@@ -8,32 +12,39 @@ zhenxuan98 - Tan Zhen Xuan
 # How to run
 
 ## Prerequisite
+- insert prerequisite here
+- etc
 
+## Step by Step Instructions
+- insert instructions here
+- etc
 
 # Development Workflow
 
 **Developers (ALL MEMBERS):**
-- Create issues under their own feature/branch
-
+- Create branch from dev and call it feature/xxx
+- Create issues in Kanban board for the feature that they are working on
+- Use the following conventions for creating the issues:
 ```Naming convention:
 Ticket No. XX
 Branch: Feature/XXXX
-Created XXXX under for XXX page
+<Description of feature or what we are trying to work on>
 ```
-- Push your own development into the specified feature/XXX branch. (1 person per feature/XXX)
+- Push commits into the specified feature/XXX branch. (1 person per feature/XXX)
+- Create Pull request accordingly (either to dev branch or others)
 
 **Suhail (Scrum Master) / Jessica (Tech Lead):**
-Comment on the issue. "Close with Comment" (for approval)
+- Approve Pull request with comment on the issue. Always "Close with Comment" for approval.
 - Merges the features/XXX into dev branch
-- Merges the dev into master branch 
-- Create release version once all fuinctionalities is done
+- Merges the dev into master branch once development is finised 
+- Create release version once all functionalities is done
 
 
 # UAT Section
 
 ## Updated System State Diagram
 
-## UAT System Test Cases table
+## UAT System Test Cases Table
 
 | ID   | Test Case Description                          | Precondition                                     | Steps                                                                                        | Excepted Results                                                                    | Actual Result | P/F |
 | ---- | ---------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------- | --- |
