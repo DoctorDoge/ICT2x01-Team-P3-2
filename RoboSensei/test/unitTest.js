@@ -46,7 +46,7 @@ describe('/POST Login', () => {
         let user = {
             newPassword: '12345'
         }
-        request(server).post('/configuration/updatePass')
+        request(server).post('/account/updatePass')
              .send(user)
            .expect(200)
             .end((err, res) => {
