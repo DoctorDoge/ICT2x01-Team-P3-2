@@ -4,7 +4,8 @@
   "description": "Robo-Sensei is a project that aims to educate user critical problem solving and computational thinking skills using robotic car with the customizable controls from the web portal",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/DoctorDoge/ICT2x01-Team-P3-2#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "blockly": "^6.20210701.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "ejs": "^3.1.6",
@@ -29,7 +31,9 @@
     "validation": "^0.0.1"
   },
   "devDependencies": {
+    "chai": "^4.3.4",
     "mocha": "^9.1.3",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "supertest": "^6.1.6"
   }
 }

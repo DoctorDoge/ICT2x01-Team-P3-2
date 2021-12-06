@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const authCheck = require('../middleware/authCheck');
 
 const User = require('../models/instructor.model');
 
@@ -14,9 +13,9 @@ router.get('/', (req, res) => {
         res.render('instructor_dashboard');
     } else {
         //User is not Authenticated..Display Login Page
-        res.render('login',{
+        res.render('login', {
             error: null
-        } );
+        });
     }
 })
 
@@ -28,19 +27,29 @@ router.post("/", async (req, res) => {
     //User is found
     if (user) {
         //Password Match
-        for (let i = 0; i < user.length; i++) {
-            if (bcrypt.compareSync(req.body.password, user[i].password)) {
-                req.login(user[i], function (err) {
-                   
-                    res.redirect('/instructor_dashboard')
-                })
-            } 
+        try {
+
+            for (let i = 0; i < user.length; i++) {
+                if (bcrypt.compareSync(req.body.password, user[i].password)) {
+                    req.login(user[i], function (err) {
+
+                        res.status(302).redirect('/instructor_dashboard');
+
+                    })
+                }
+            }
+            throw 'Invalid Password'; // generates an exception
+        } catch (e) {
+            // statements to handle any exceptions
+            res.status(401).render('login', {
+                error: e
+            });
         }
-       
+
     } else {
         //User not found
-        res.render('login', {
-            error: "Invalid Password"
+        res.status(400).render('login', {
+            error: "User Not found"
         })
     }
 })

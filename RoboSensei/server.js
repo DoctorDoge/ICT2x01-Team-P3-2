@@ -87,6 +87,8 @@ app.use('/logout',(req,res)=>{
 var user = require("./routers/student");
 app.use("/student", user);
 
-app.listen(3001, () =>{
+var server = app.listen(3001, () =>{
     console.log('app is running on port 3001');
 })
+
+module.exports = server;
