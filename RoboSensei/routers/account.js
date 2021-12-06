@@ -28,7 +28,6 @@ router.post("/", async (req, res) => {
     if (user) {
         //Password Match
         try {
-
             for (let i = 0; i < user.length; i++) {
                 if (bcrypt.compareSync(req.body.password, user[i].password)) {
                     req.login(user[i], function (err) {
@@ -38,7 +37,6 @@ router.post("/", async (req, res) => {
                     })
                 }
             }
-            throw 'Invalid Password'; // generates an exception
         } catch (e) {
             // statements to handle any exceptions
             res.status(401).render('login', {
@@ -59,7 +57,7 @@ router.post("/updatePass", async (req, res) => {
     try {
         const salt = await bcrypt.genSaltSync(10);
         // now we set user password to hashed password
-        const password = await bcrypt.hashSync(req.body.password, salt);
+        const password = await bcrypt.hashSync(req.body.newPassword, salt);
 
         await User.updateOne({
             userId: req._id
@@ -69,6 +67,7 @@ router.post("/updatePass", async (req, res) => {
             }
         }).exec();
         
+        res.redirect('/account');
 
     } catch (err) {
         console.error(err);
