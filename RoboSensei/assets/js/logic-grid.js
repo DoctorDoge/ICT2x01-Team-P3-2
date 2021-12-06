@@ -297,13 +297,12 @@ Game.render = function () {
 function moveForwardButton() {
     moveFlag = 1;
     Game.update();
-
 }
 
 function turnLeftButton() {
-        moveFlag = 1;
 
     directionFlag += 1;
+    moveForwardButton()
     if(directionFlag > 4){
         directionFlag = 1;
     }
