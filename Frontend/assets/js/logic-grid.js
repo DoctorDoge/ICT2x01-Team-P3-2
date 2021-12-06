@@ -5,7 +5,7 @@ var map = {
     layers: [[
         1, 1, 1, 1, 1, 1, 1, 1,
         1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 2, 1,
         1, 1, 1, 1, 1, 1, 1, 1,
         1, 1, 1, 1, 1, 1, 1, 1,
         1, 1, 1, 1, 1, 1, 1, 1,
@@ -13,12 +13,12 @@ var map = {
         1, 1, 1, 1, 1, 1, 1, 1
     ], [
         5, 5, 5, 5, 5, 5, 5, 5,
+        5, 5, 5, 5, 5, 5, 5, 5,
         5, 0, 0, 0, 0, 0, 0, 5,
-        5, 0, 0, 0, 0, 0, 2, 5,
-        5, 0, 0, 0, 0, 0, 0, 5,
-        5, 0, 0, 0, 0, 0, 0, 5,
-        5, 0, 0, 0, 0, 0, 0, 5,
-        5, 0, 0, 0, 0, 0, 0, 5,
+        5, 5, 5, 5, 5, 5, 5, 5,
+        5, 5, 5, 5, 5, 5, 5, 5,
+        5, 5, 5, 5, 5, 5, 5, 5,
+        5, 5, 5, 5, 5, 5, 5, 5,
         5, 5, 5, 5, 5, 5, 5, 5
     ]],
     getTile: function (layer, col, row) {
@@ -50,8 +50,17 @@ var map = {
     }
 };
 
+var spawn = {
+    startX: 96,
+    startY: 160,
+    endX: 416,
+    endY: 160
+};
+
+var level = 1;
 var moveFlag = 0;
 var directionFlag = 2;
+var reachedFlag = 0;
 
 const FACING_RIGHT = 0;
 const FACING_LEFT = 75;
@@ -159,9 +168,20 @@ Hero.prototype._collide = function (dirx, diry) {
         this.x = this.width / 2 + this.map.getX(col + 1);
     }
 
-    // alert("Collision found!");
-    // resetButton();
+    document.getElementById("collisionModal").style.display = "block";
+    resetButton();
 };
+
+Game.isFlag = function () {
+    if(this.hero.x == spawn.endX && this.hero.y == spawn.endY && reachedFlag == 1){
+        document.getElementById("completedModal").style.display = "block";
+    
+        resetButton();
+    } 
+    if(this.hero.x == spawn.endX && this.hero.y == spawn.endY && reachedFlag == 0){
+        reachedFlag = 1;
+    } 
+}
 
 Game.load = function () {
     return [
@@ -173,7 +193,7 @@ Game.load = function () {
 Game.init = function () {
     this.tileAtlas = Loader.getImage('tiles');
 
-    this.hero = new Hero(map, 96, 160);
+    this.hero = new Hero(map, spawn.startX, spawn.startY);
     this.camera = new Camera(map, 512, 512);
     this.camera.follow(this.hero);
 };
@@ -202,6 +222,7 @@ Game.update = function (delta) {
 
     this.hero.move(dirx, diry);
     this.camera.update();
+    this.isFlag();
 };
 
 Game._drawLayer = function (layer) {
@@ -272,6 +293,152 @@ Game.render = function () {
     this._drawGrid();
 };
 
+function level1(){
+    level = 1;
+    loadLevel();
+}
+
+function level2(){
+    level = 2;
+    loadLevel();
+}
+
+function level3(){
+    level = 3;
+    loadLevel();
+}
+
+function level4(){
+    level = 4;
+    loadLevel();
+}
+
+function loadLevel() {
+    if(level == 1){
+        map.layers = 
+        [[
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 2, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1
+        ], [
+            5, 5, 5, 5, 5, 5, 5, 5,
+            5, 5, 5, 5, 5, 5, 5, 5,
+            5, 0, 0, 0, 0, 0, 0, 5,
+            5, 5, 5, 5, 5, 5, 5, 5,
+            5, 5, 5, 5, 5, 5, 5, 5,
+            5, 5, 5, 5, 5, 5, 5, 5,
+            5, 5, 5, 5, 5, 5, 5, 5,
+            5, 5, 5, 5, 5, 5, 5, 5
+        ]];
+        resetFlags();
+        
+        spawn.startX = 96;
+        spawn.startY = 160;
+        spawn.endX = 416;
+        spawn.endY = 160;
+        
+        Game.init();
+    }
+
+    if(level == 2){
+        map.layers = 
+        [[
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 2, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1
+        ], [
+            5, 5, 5, 5, 5, 5, 5, 5,
+            5, 5, 5, 5, 5, 5, 5, 5,
+            5, 0, 0, 0, 0, 0, 5, 5,
+            5, 5, 5, 5, 5, 0, 5, 5,
+            5, 5, 5, 5, 5, 0, 5, 5,
+            5, 5, 5, 5, 5, 5, 5, 5,
+            5, 5, 5, 5, 5, 5, 5, 5,
+            5, 5, 5, 5, 5, 5, 5, 5
+        ]];
+        resetFlags();
+        
+        spawn.startX = 96;
+        spawn.startY = 160;
+        spawn.endX = 352;
+        spawn.endY = 288;
+        
+        Game.init();
+    }
+
+    if(level == 3){
+        map.layers = 
+        [[
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 2, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1
+        ], [
+            5, 5, 5, 5, 5, 5, 5, 5,
+            5, 5, 5, 5, 5, 5, 0, 5,
+            5, 5, 5, 5, 5, 0, 0, 5,
+            5, 5, 5, 5, 0, 0, 5, 5,
+            5, 5, 5, 0, 0, 5, 5, 5,
+            5, 5, 0, 0, 5, 5, 5, 5,
+            5, 0, 0, 5, 5, 5, 5, 5,
+            5, 5, 5, 5, 5, 5, 5, 5
+        ]];
+        resetFlags();
+        
+        spawn.startX = 96;
+        spawn.startY = 416;
+        spawn.endX = 416;
+        spawn.endY = 96;
+        
+        Game.init();
+    }
+
+    if(level == 4){
+        map.layers = 
+        [[
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 2, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1
+        ], [
+            5, 5, 5, 5, 5, 5, 5, 5,
+            5, 5, 5, 5, 5, 5, 5, 5,
+            5, 0, 0, 0, 0, 0, 5, 5,
+            5, 0, 5, 5, 5, 5, 5, 5,
+            5, 0, 5, 0, 0, 0, 5, 5,
+            5, 0, 5, 5, 5, 0, 5, 5,
+            5, 0, 0, 0, 0, 0, 5, 5,
+            5, 5, 5, 5, 5, 5, 5, 5
+        ]];
+        resetFlags();
+        
+        spawn.startX = 224;
+        spawn.startY = 288;
+        spawn.endX = 352;
+        spawn.endY = 160;
+        
+        Game.init();
+    }
+}
+
 function moveForwardButton() {
     moveFlag = 1;
 }
@@ -290,4 +457,16 @@ function turnRightButton() {
     if(directionFlag < 1){
         directionFlag = 4;
     }
-} 
+}
+
+function resetButton() {
+    resetFlags();
+    Game.init();
+}
+
+function resetFlags(){
+    moveFlag = 0;
+    directionFlag = 2;
+    currentDirection = FACING_RIGHT;
+    reachedFlag = 0;
+}

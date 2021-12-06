@@ -78,10 +78,10 @@
 
               <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group me-2" role="group" aria-label="First group">
-                  <button type="button" class="btn btn-primary">Level 1</button>
-                  <button type="button" class="btn btn-primary">Level 2</button>
-                  <button type="button" class="btn btn-primary">Level 3</button>
-                  <button type="button" class="btn btn-primary">Level 4</button>
+                  <button type="button" class="btn btn-primary" onclick="level1()">Level 1</button>
+                  <button type="button" class="btn btn-primary" onclick="level2()">Level 2</button>
+                  <button type="button" class="btn btn-primary" onclick="level3()">Level 3</button>
+                  <button type="button" class="btn btn-primary" onclick="level4()">Level 4</button>
                 </div>
               </div>
             </div>
@@ -137,6 +137,20 @@
       </div>
       <!-- page-body-wrapper ends -->
     </div>
+    <!-- modal content -->
+    <div id="collisionModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Collision Detected!</p>
+        <p>Resetting Level!</p>
+      </div>
+    </div>
+    <div id="completedModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Level Completed!</p>
+      </div>
+    </div>
     <!-- blockly scripts-->
     <script>
       let currentButton;
@@ -154,6 +168,30 @@
         }
         alert(button.blocklyXml);
       });
+    </script>
+    <!-- modal scripts-->
+    <script>
+      var collisionModal = document.getElementById("collisionModal");
+      var collisionSpan = document.getElementsByClassName("close")[0];
+      var completedModal = document.getElementById("completedModal");
+      var completedSpan = document.getElementsByClassName("close")[1];
+
+      collisionSpan.onclick = function() {
+        collisionModal.style.display = "none";
+      }
+
+      completedSpan.onclick = function() {
+        completedModal.style.display = "none";
+      }
+
+      window.onclick = function(event) {
+        if (event.target == collisionModal) {
+          collisionModal.style.display = "none";
+        }
+        if (event.target == completedModal) {
+          completedModal.style.display = "none";
+        }
+      } 
     </script>
     <!-- container-scroller -->
     <!-- plugins:js -->
