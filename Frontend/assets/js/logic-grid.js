@@ -168,7 +168,7 @@ Hero.prototype._collide = function (dirx, diry) {
         this.x = this.width / 2 + this.map.getX(col + 1);
     }
 
-    alert("Collision found!");
+    document.getElementById("collisionModal").style.display = "block";
     resetButton();
 };
 
@@ -462,7 +462,6 @@ function turnRightButton() {
 function resetButton() {
     resetFlags();
     Game.init();
-    alert("Resetting Level!");
 }
 
 function resetFlags(){

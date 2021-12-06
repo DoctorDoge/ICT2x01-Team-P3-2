@@ -137,6 +137,20 @@
       </div>
       <!-- page-body-wrapper ends -->
     </div>
+    <!-- modal content -->
+    <div id="collisionModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Collision Detected!</p>
+        <p>Resetting Level!</p>
+      </div>
+    </div>
+    <div id="completedModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Level Completed!</p>
+      </div>
+    </div>
     <!-- blockly scripts-->
     <script>
       let currentButton;
@@ -154,6 +168,30 @@
         }
         alert(button.blocklyXml);
       });
+    </script>
+    <!-- modal scripts-->
+    <script>
+      var collisionModal = document.getElementById("collisionModal");
+      var collisionSpan = document.getElementsByClassName("close")[0];
+      var completedModal = document.getElementById("completedModal");
+      var completedSpan = document.getElementsByClassName("close")[1];
+
+      collisionSpan.onclick = function() {
+        collisionModal.style.display = "none";
+      }
+
+      completedSpan.onclick = function() {
+        completedModal.style.display = "none";
+      }
+
+      window.onclick = function(event) {
+        if (event.target == collisionModal) {
+          collisionModal.style.display = "none";
+        }
+        if (event.target == completedModal) {
+          completedModal.style.display = "none";
+        }
+      } 
     </script>
     <!-- container-scroller -->
     <!-- plugins:js -->
