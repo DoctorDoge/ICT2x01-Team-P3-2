@@ -188,7 +188,7 @@
       let canvas = document.getElementById('myCanvas');
       let context = canvas.getContext('2d');
       let mouseDown;
-      let saveString;
+      var saveString;
       canvas.addEventListener('mousedown', doMouseDown);
       document.addEventListener('contextmenu', event => event.preventDefault());
       canvas.addEventListener('mousemove', doMouseMove);
@@ -220,11 +220,10 @@
           if (tiles[i] != undefined) levelString = levelString + tiles[i];
           levelString = levelString + ',';
         }
-        levelString = levelString + '];';
+        levelString = levelString + ']';
 
-        if(levelString.length == 131){
+        if(levelString.length == 130){
           saveString = levelString;
-          alert(saveString);
         }
       }
        

@@ -480,3 +480,17 @@ function resetFlags(){
     currentDirection = FACING_RIGHT;
     reachedFlag = 0;
 }
+
+function loadButton(){
+    map.layers = 
+        [[
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1,
+        ], saveString];
+}
