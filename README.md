@@ -12,15 +12,12 @@ zhenxuan98 - Tan Zhen Xuan
 # How to run
 
 ## Prerequisite
-- Node Js Installed
-- Express Js Installed
+- insert prerequisite here
+- etc
 
 ## Step by Step Instructions
-- Clone the repo to your desired directory
-1) cd into RoboSensei
-2) Type 'npm install' in the terminal to install dependencies
-3) Type 'npm install blockly' in the terminal to install blockly package
-4) Finally to run the application type npm start
+- insert instructions here
+- etc
 
 # Development Workflow
 
@@ -106,6 +103,25 @@ Branch: Feature/XXXX
 
 
 https://user-images.githubusercontent.com/55780919/144942455-e73c9f5e-3564-4470-9526-9e22dd35aa8e.mp4
+
+## Test Cases:
+- Login as Instructor role with a valid password
+- Login as Instructor role with an invalid password
+- Update password at the configuration page after successfully authenticated
+- Switch role to student and successfully logout
+
+## Location of API:
+under "routers" folder, the file name is "account.js". The file contains all the api used in the account management.
+
+## Statistics for each test case:
+Each test case succesfully executed 5 out of 5 times. By running the whitebox testing 5 times to get this outcome.
+
+## How to run test suite:
+- open terminal in the visual studio
+- type "npm run test" into the terminal
+
+![image](https://user-images.githubusercontent.com/68848568/144943896-f45ec0db-b353-4686-abd9-49e0bb992b4a.png)
+
 
 
 
