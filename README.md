@@ -20,6 +20,7 @@ zhenxuan98 - Tan Zhen Xuan
 2) Type 'npm install' in the terminal to install project's dependencies
 3) Type 'npm install blockly' in the terminal to install blockly package
 4) Type 'npm start' in the terminal to run the project
+5) Type 'localhost:3001' in google chrome browser 
 
 # Development Workflow
 
