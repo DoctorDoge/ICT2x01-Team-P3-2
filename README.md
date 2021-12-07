@@ -12,14 +12,12 @@ zhenxuan98 - Tan Zhen Xuan
 # How to run
 
 ## Prerequisite
-- Node Js Installed
-- Express Js Installed
+- insert prerequisite here
+- etc
 
 ## Step by Step Instructions
-1) cd into RoboSensei
-2) Type 'npm install' in the terminal to install project's dependencies
-3) Type 'npm install blockly' in the terminal to install blockly package
-4) Type 'npm start' in the terminal to run the project
+- insert instructions here
+- etc
 
 # Development Workflow
 
@@ -99,6 +97,12 @@ Branch: Feature/XXXX
 | ST15 | Submit Command to Robotic Car is unsuccessful  | In Block-Based Game Screen                       | 1\. Disconnect the WiFi from the machine to lose the established connection with Robotic Car | 1\. Logs to show command has not been submitted to the Robotic Car                  |               |     |
 |      |                                                | Input Panel has Command Blocks in it             | 2\. Click on submit                                                                          |                                                                                     |               |     |
 |      |                                                |                                                  | 3\. Observe that logs show that command has not been sent                                    |                                                                                     |               |     |
+
+## UAT Video
+
+
+https://user-images.githubusercontent.com/72452276/144944395-ef8d64f3-ca9c-4a04-b94d-6a7bf8c508b2.mov
+
 
 # Whitebox Testing
 
