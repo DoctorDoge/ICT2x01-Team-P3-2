@@ -12,12 +12,14 @@ zhenxuan98 - Tan Zhen Xuan
 # How to run
 
 ## Prerequisite
-- insert prerequisite here
-- etc
+- Node Js Installed
+- Express Js Installed
 
 ## Step by Step Instructions
-- insert instructions here
-- etc
+1) cd into RoboSensei
+2) Type 'npm install' in the terminal to install project's dependencies
+3) Type 'npm install blockly' in the terminal to install blockly package
+4) Type 'npm start' in the terminal to run the project
 
 # Development Workflow
 
